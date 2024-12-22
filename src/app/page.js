@@ -1,5 +1,20 @@
-import React from "react";
+import Footer from './components/Footer';
+import HeroSection from './components/MidSection';
+import Features from './components/Features';
+import Navbar from './components/Navbar';
+import MidSection from './components/MidSection';
 
-export default function page() {
-  return <div>page</div>;
-}
+const Home = () => {
+  return (
+    <>
+     
+      <Navbar />
+      < MidSection/>
+      < Features/>
+      <Footer />
+    </>
+  );
+};
+
+export default Home;
+
