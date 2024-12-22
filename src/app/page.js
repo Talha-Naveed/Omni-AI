@@ -1,20 +1,15 @@
-import Footer from './components/Footer';
-import HeroSection from './components/MidSection';
-import Features from './components/Features';
-import Navbar from './components/Navbar';
-import MidSection from './components/MidSection';
+import HeroSection from "./components/MidSection";
+import Features from "./components/Features";
+import MidSection from "./components/MidSection";
 
+// What is this HeroSection
 const Home = () => {
   return (
     <>
-     
-      <Navbar />
-      < MidSection/>
-      < Features/>
-      <Footer />
+      <MidSection />
+      <Features />
     </>
   );
 };
 
 export default Home;
-
