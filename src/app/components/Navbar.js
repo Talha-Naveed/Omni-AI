@@ -1,4 +1,6 @@
-import React from "react";
+import * as React from "react";
+import { cn } from "@/lib/utils";
+import Link from "next/link";
 import {
   NavigationMenu,
   NavigationMenuContent,
@@ -10,6 +12,19 @@ import {
   NavigationMenuViewport,
 } from "@/components/ui/navigation-menu";
 
+const components = [
+  {
+    title: "LinkedIn Script Gen",
+    href: "/llm/linkedin-script",
+    description: "A compact generator for your post captions",
+  },
+
+  {
+    title: "YouTube Script Gen",
+    href: " /llm/yt-script",
+    description: "Need some script to start your YT journey.",
+  },
+];
 const Navbar = () => {
   return (
     <>
@@ -18,12 +33,24 @@ const Navbar = () => {
           Omni AI
         </h1>
         <div className="flex space-x-5 text-xl xl:mx-60 lg:mx-44 md:mx-20 sm:mx-0">
-          <NavigationMenu>
+          <NavigationMenu className="">
             <NavigationMenuList>
               <NavigationMenuItem>
-                <NavigationMenuTrigger>Item One</NavigationMenuTrigger>
+                <NavigationMenuTrigger className="bg-inherit text-xl">
+                  Services
+                </NavigationMenuTrigger>
                 <NavigationMenuContent>
-                  <NavigationMenuLink>Link</NavigationMenuLink>
+                  <ul className="grid w-[400px] gap-3 p-4 md:w-[500px] md:grid-cols-2 lg:w-[600px]">
+                    {components.map((component) => (
+                      <ListItem
+                        key={component.title}
+                        title={component.title}
+                        href={component.href}
+                      >
+                        {component.description}
+                      </ListItem>
+                    ))}
+                  </ul>
                 </NavigationMenuContent>
               </NavigationMenuItem>
             </NavigationMenuList>
@@ -59,5 +86,30 @@ const Navbar = () => {
     </>
   );
 };
+
+const ListItem = React.forwardRef(
+  ({ className, title, children, ...props }, ref) => {
+    return (
+      <li>
+        <NavigationMenuLink asChild>
+          <Link
+            ref={ref}
+            className={cn(
+              "block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground",
+              className
+            )}
+            {...props}
+          >
+            <div className="text-sm font-medium leading-none">{title}</div>
+            <p className="line-clamp-2 text-sm leading-snug text-muted-foreground">
+              {children}
+            </p>
+          </Link>
+        </NavigationMenuLink>
+      </li>
+    );
+  }
+);
+ListItem.displayName = "ListItem";
 
 export default Navbar;
