@@ -24,6 +24,12 @@ const components = [
     href: " /llm/yt-script",
     description: "Need some script to start your YT journey.",
   },
+
+  {
+    title: "Likh do yahan kuch",
+    href: "/",
+    description: "Batman",
+  },
 ];
 const Navbar = () => {
   return (
