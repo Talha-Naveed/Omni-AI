@@ -76,19 +76,19 @@ const Navbar = () => {
           </a>
         </div>
       </nav>
-      <div className="">
-        {/* This is where the main content will go */}
+      {/* <div className=""> */}
+      {/* This is where the main content will go */}
 
-        <div className="container mx-auto sm:px-8 md:px-16 lg:px-24">
-          {/* CHange this background to transparent so the image */}
+      {/* <div className="container mx-auto sm:px-8 md:px-16 lg:px-24"> */}
+      {/* CHange this background to transparent so the image */}
 
-          {/* Content */}
-          <div className="mt-8 text-center">
-            <h2 className="text-3xl font-bold">Welcome to Omni AI</h2>
-            <p className="mt-4 text-lg">Here’s some interesting content.</p>
-          </div>
-        </div>
-      </div>
+      {/* Content */}
+      {/* <div className="mt-8 text-center"> */}
+      {/* <h2 className="text-3xl font-bold">Welcome to Omni AI</h2> */}
+      {/* <p className="mt-4 text-lg">Here’s some interesting content.</p> */}
+      {/* </div> */}
+      {/* </div> */}
+      {/* </div> */}
     </>
   );
 };
