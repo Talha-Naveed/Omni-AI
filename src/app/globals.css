@@ -77,3 +77,6 @@ a {
   }
 }
 
+.container-custom {
+  @apply xl:mx-60 lg:mx-44 md:mx-20 sm:mx-0;
+}
