@@ -11,7 +11,7 @@ const MidSection = () => {
         ></source>
       </video>
 
-      <div className="container-custom absolute top-1/4 text-5xl text-left lg:text-9xl  md:text-7xl px-5 border border-black">
+      <div className="container-custom absolute top-1/4 text-5xl text-left lg:text-9xl  md:text-7xl px-5 ">
         Welcome...
         <div className="lg:text-5xl text-3xl md:text-3xl">
           All your AI need at one place
