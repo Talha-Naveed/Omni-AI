@@ -1,12 +1,6 @@
 // "use server";
 "use client";
-import {
-  Github,
-  Instagram,
-  Linkedin,
-  LinkedinIcon,
-  LucideLinkedin,
-} from "lucide-react";
+import { Github, Instagram, Linkedin } from "lucide-react";
 import React from "react";
 import { Card, CardContent } from "@/components/ui/card";
 import {
@@ -41,41 +35,6 @@ export default function Team() {
           The Minds behind OmniAI
         </div>
         <div>
-          {/* <Carousel
-            className="w-full h-200"
-            // opts={{
-            //   align: "start",
-            //   loop: true,
-            // }}
-            plugins={[
-              Autoplay({
-                delay: 2000,
-              }),
-            ]}
-          >
-            <CarouselContent>
-              {team_components.map((member) => (
-                <CarouselItem key={member.name}>
-                  <div className="p-1 ">
-                    <Card className="h-full">
-                      <CardContent className="flex p-6 h-full">
-                        {member.name}
-                        <div className="w-1/2">sda</div>
-                        <div
-                          className="w-1/2 h-auto"
-                          style={{ backgroundImage: `url(${member.href})` }}
-                        ></div>
-                      </CardContent>
-                    </Card>
-                    <Card>sds</Card>
-                  </div>
-                </CarouselItem>
-              ))}
-            </CarouselContent>
-            <CarouselPrevious />
-            <CarouselNext />
-          </Carousel> */}
-
           <Carousel
             opts={{
               align: "start",
