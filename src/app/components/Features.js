@@ -3,22 +3,22 @@ const Features = () => {
     {
       title: "Large Language Models",
       description:
-        "Powerful conversational AI at your fingertips for chatbots, content generation, and more.",
+        "Powerful AI at your fingertips for chatbots, content generation, and more.",
     },
     {
       title: "Live Sentiment Analysis",
       description:
         "Monitor emotions in real-time to make data-driven decisions.",
     },
-    {
-      title: "Retrieval Augmented Generation",
-      description:
-        "Empower your data-driven workflows with AI-assisted content retrieval.",
-    },
+    // {
+    //   title: "Retrieval Augmented Generation",
+    //   description:
+    //     "Empower your data-driven workflows with AI-assisted content retrieval.",
+    // },
     {
       title: "Custom AI Solution",
       description:
-        "Tailored AI tools to fit your business needs, helping you stay ahead.dd",
+        "Tailored AI tools to fit your business needs, helping you stay ahead.  ",
     },
   ];
 
