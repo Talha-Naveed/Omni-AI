@@ -1,74 +1,64 @@
-import React from "react";
+"use client";
+
+import { motion } from "framer-motion";
+import { Shield, Zap, Users } from "lucide-react";
 
 export default function Why() {
+  const reasons = [
+    {
+      icon: <Shield className="w-12 h-12 text-pink-500" />,
+      title: "User-Friendly Interface",
+      description: "Accessible for experts and beginners alike.",
+    },
+    {
+      icon: <Zap className="w-12 h-12 text-purple-500" />,
+      title: "Real-Time Insights",
+      description: "Stay ahead with live sentiment and performance tracking.",
+    },
+    {
+      icon: <Users className="w-12 h-12 text-blue-500" />,
+      title: "Scalable Solutions",
+      description: "Grow your toolkit as your needs evolve.",
+    },
+  ];
+
   return (
-    <section className="bg-gray-200 py-16">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <h2 className="text-center text-4xl font-bold text-gray-800 mb-12">
-          Why Choose Us?
-        </h2>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          <div className="bg-white shadow-lg rounded-lg p-6 text-center">
-            <div className="text-4xl text-blue-500 mb-4">
-              <i className="fas fa-cogs"></i>
-            </div>
-            <h3 className="text-xl font-semibold text-gray-800 mb-2">
-              Modular Design
-            </h3>
-            <p className="text-gray-600">
-              Pick and choose the AI tools you need. No unnecessary extras.
-            </p>
-          </div>
+    <div className="py-20">
+      <div className="container-custom">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5 }}
+          viewport={{ once: true }}
+          className="text-center mb-16"
+        >
+          <h2 className="text-4xl md:text-5xl font-bold mb-6 text-white">
+            Why Choose <span className="text-pink-500">Us</span>
+          </h2>
+          <p className="text-gray-300 max-w-2xl mx-auto">
+            Experience the difference with our cutting-edge AI solutions
+          </p>
+        </motion.div>
 
-          <div className="bg-white shadow-lg rounded-lg p-6 text-center">
-            <div className="text-4xl text-green-500 mb-4">
-              <i className="fas fa-brain"></i>
-            </div>
-            <h3 className="text-xl font-semibold text-gray-800 mb-2">
-              Cutting-Edge Technology
-            </h3>
-            <p className="text-gray-600">
-              Built on the latest advancements in AI and machine learning.
-            </p>
-          </div>
-
-          <div className="bg-white shadow-lg rounded-lg p-6 text-center">
-            <div className="text-4xl text-yellow-500 mb-4">
-              <i className="fas fa-user"></i>
-            </div>
-            <h3 className="text-xl font-semibold text-gray-800 mb-2">
-              User-Friendly Interface
-            </h3>
-            <p className="text-gray-600">
-              Accessible for experts and beginners alike.
-            </p>
-          </div>
-
-          <div className="bg-white shadow-lg rounded-lg p-6 text-center">
-            <div className="text-4xl text-red-500 mb-4">
-              <i className="fas fa-chart-line"></i>
-            </div>
-            <h3 className="text-xl font-semibold text-gray-800 mb-2">
-              Real-Time Insights
-            </h3>
-            <p className="text-gray-600">
-              Stay ahead with live sentiment and performance tracking.
-            </p>
-          </div>
-
-          <div className="bg-white shadow-lg rounded-lg p-6 text-center">
-            <div className="text-4xl text-purple-500 mb-4">
-              <i className="fas fa-arrows-alt"></i>
-            </div>
-            <h3 className="text-xl font-semibold text-gray-800 mb-2">
-              Scalable Solutions
-            </h3>
-            <p className="text-gray-600">
-              Grow your toolkit as your needs evolve.
-            </p>
-          </div>
+        <div className="grid md:grid-cols-3 gap-8">
+          {reasons.map((reason, index) => (
+            <motion.div
+              key={index}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: index * 0.1 }}
+              viewport={{ once: true }}
+              className="bg-gray-800/50 p-8 rounded-2xl text-center hover:bg-gray-800/70 transition-all duration-300"
+            >
+              <div className="flex justify-center mb-6">{reason.icon}</div>
+              <h3 className="text-xl font-bold mb-4 text-white">
+                {reason.title}
+              </h3>
+              <p className="text-gray-300">{reason.description}</p>
+            </motion.div>
+          ))}
         </div>
       </div>
-    </section>
+    </div>
   );
 }
