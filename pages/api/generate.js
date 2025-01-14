@@ -1,3 +1,5 @@
+const path = require("path");
+require("dotenv").config({ path: path.resolve(__dirname, "../.env") });
 import { GoogleGenerativeAI } from "@google/generative-ai";
 
 export default async function handler(req, res) {
