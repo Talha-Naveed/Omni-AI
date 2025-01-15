@@ -54,13 +54,10 @@ const Navbar = () => {
 
       {/* Navigation Links */}
       <div
-        className={cn(
-          "w-full lg:flex lg:items-center lg:w-auto lg:space-x-5",
-          {
-            "hidden lg:flex": !menuOpen,
-            "block lg:flex": menuOpen,
-          }
-        )}
+        className={cn("w-full lg:flex lg:items-center lg:w-auto lg:space-x-5", {
+          "hidden lg:flex": !menuOpen,
+          "block lg:flex": menuOpen,
+        })}
       >
         {/* Services Dropdown */}
         <NavigationMenu>
@@ -97,7 +94,7 @@ const Navbar = () => {
           <Link href="/contact" className="hover:underline text-xl">
             Contact
           </Link>
-          <Link href="/login" className="hover:underline text-xl">
+          <Link href="/auth/login" className="hover:underline text-xl">
             Login
           </Link>
         </div>
@@ -106,27 +103,29 @@ const Navbar = () => {
   );
 };
 
-const ListItem = React.forwardRef(({ className, title, children, ...props }, ref) => {
-  return (
-    <li>
-      <NavigationMenuLink asChild>
-        <Link
-          ref={ref}
-          className={cn(
-            "block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground",
-            className
-          )}
-          {...props}
-        >
-          <div className="text-sm font-medium leading-none">{title}</div>
-          <p className="line-clamp-2 text-sm leading-snug text-muted-foreground">
-            {children}
-          </p>
-        </Link>
-      </NavigationMenuLink>
-    </li>
-  );
-});
+const ListItem = React.forwardRef(
+  ({ className, title, children, ...props }, ref) => {
+    return (
+      <li>
+        <NavigationMenuLink asChild>
+          <Link
+            ref={ref}
+            className={cn(
+              "block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground",
+              className
+            )}
+            {...props}
+          >
+            <div className="text-sm font-medium leading-none">{title}</div>
+            <p className="line-clamp-2 text-sm leading-snug text-muted-foreground">
+              {children}
+            </p>
+          </Link>
+        </NavigationMenuLink>
+      </li>
+    );
+  }
+);
 ListItem.displayName = "ListItem";
 
 export default Navbar;
