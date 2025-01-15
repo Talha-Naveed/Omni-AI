@@ -24,7 +24,47 @@ export default function Login() {
     e.preventDefault();
     setLoading(true);
 
-    // Add your login logic here
+    try {
+      const response = await fetch("/api/auth/login", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          email: formData.email,
+          password: formData.password,
+        }),
+      });
+
+      if (!response.ok) {
+        const errorData = await response.json();
+        throw new Error(errorData.error || "Failed to log in");
+      }
+
+      const data = await response.json();
+
+      // Show success splash screen
+      const splashScreen = document.createElement("div");
+      splashScreen.className =
+        "fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50";
+      splashScreen.innerHTML = `
+        <div class="bg-white p-8 rounded-lg text-center">
+          <h2 class="text-2xl font-bold mb-4">Login Successful!</h2>
+          <p>Welcome back ${data.name || "User"}!</p>
+        </div>
+      `;
+      document.body.appendChild(splashScreen);
+
+      // Wait 2 seconds then redirect
+      await new Promise((resolve) => setTimeout(resolve, 2000));
+
+      // Remove splash screen and redirect
+      splashScreen.remove();
+      window.location.href = "/"; // Redirect to landing page
+    } catch (error) {
+      console.error("Login error:", error);
+      setError(error.message || "Failed to log in");
+    }
 
     setTimeout(() => {
       setLoading(false);

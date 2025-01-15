@@ -13,6 +13,7 @@ export default function SignUp() {
     confirmPassword: "",
   });
   const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(""); // Add error state
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -25,12 +26,60 @@ export default function SignUp() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
+    setError(""); // Clear previous errors
 
-    // Add your signup logic here
-
-    setTimeout(() => {
+    // Validate passwords match
+    if (formData.password !== formData.confirmPassword) {
+      setError("Passwords do not match");
       setLoading(false);
-    }, 2000);
+      return;
+    }
+
+    try {
+      // Changed endpoint from /login to /signup
+      const response = await fetch("/api/auth/signup", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          name: formData.name, // Include name in request
+          email: formData.email,
+          password: formData.password,
+        }),
+      });
+
+      if (!response.ok) {
+        const errorData = await response.json();
+        throw new Error(errorData.error || "Failed to sign up");
+      }
+
+      const data = await response.json();
+
+      // Show success splash screen
+      const splashScreen = document.createElement("div");
+      splashScreen.className =
+        "fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50";
+      splashScreen.innerHTML = `
+        <div class="bg-white p-8 rounded-lg text-center">
+          <h2 class="text-2xl font-bold mb-4">Sign Up Successful!</h2>
+          <p>Welcome ${formData.name || "User"}!</p>
+        </div>
+      `;
+      document.body.appendChild(splashScreen);
+
+      // Wait 2 seconds then redirect
+      await new Promise((resolve) => setTimeout(resolve, 2000));
+
+      // Remove splash screen and redirect
+      splashScreen.remove();
+      window.location.href = "/"; // Redirect to landing page
+    } catch (error) {
+      console.error("Signup error:", error);
+      setError(error.message || "Failed to sign up");
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -48,6 +97,12 @@ export default function SignUp() {
             </h1>
             <p className="text-gray-400">Create your account to get started</p>
           </div>
+
+          {error && (
+            <div className="mb-4 p-3 bg-red-500/10 border border-red-500 text-red-500 rounded-lg">
+              {error}
+            </div>
+          )}
 
           <form onSubmit={handleSubmit} className="space-y-6">
             <div>
