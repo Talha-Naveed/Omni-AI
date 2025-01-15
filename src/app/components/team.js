@@ -25,7 +25,12 @@ export default function Team() {
       Instagram: "https://www.instagram.com/talha._.naveed/",
     },
     {
-      name: "teser",
+      name: "Noor Fatima",
+      biography: "Software Engineering Enthusiast",
+      href: "/noorfatyma.jpg",
+      github: "https://github.com/NoorFatyma",
+      Linkedin: "https://linkedin.com/in/noor-fatima-5559732b3",
+      Instagram: "https://www.instagram.com/noorahfatyma/",
     },
   ];
   return (
