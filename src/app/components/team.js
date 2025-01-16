@@ -32,6 +32,14 @@ export default function Team() {
       Linkedin: "https://linkedin.com/in/noor-fatima-5559732b3",
       Instagram: "https://www.instagram.com/noorahfatyma/",
     },
+    {
+      name: "Zaynab Zya",
+      biography: "Database Engineer",
+      href: "/zaynab.jpg",
+      github: "https://github.com/zaynabzya",
+      Linkedin: "https://www.linkedin.com/in/zaynabzya/",
+      Instagram: "https://www.instagram.com/zaynabzya/",
+    },
   ];
   return (
     <div className="bg-gray-200 w-full h-auto">
