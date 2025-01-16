@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { Loader2 } from "lucide-react";
 import {
@@ -25,6 +25,43 @@ const LinkedInCaptionGenerator = () => {
 
   const [loading, setLoading] = useState(false);
   const [generatedContent, setGeneratedContent] = useState("");
+  const [savedResponses, setSavedResponses] = useState([]);
+
+  // Fetch saved responses when component mounts
+  useEffect(() => {
+    fetchSavedResponses();
+  }, []);
+
+  const fetchSavedResponses = async () => {
+    try {
+      const response = await fetch("/api/linked-responses");
+      if (!response.ok) throw new Error("Failed to fetch responses");
+      const data = await response.json();
+      setSavedResponses(data);
+    } catch (error) {
+      console.error("Error fetching responses:", error);
+    }
+  };
+
+  const saveResponse = async (content) => {
+    try {
+      const response = await fetch("/api/linked-responses", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          title: "LinkedIn Post",
+          content: content,
+        }),
+      });
+
+      if (!response.ok) throw new Error("Failed to save response");
+      await fetchSavedResponses(); // Refresh the list after saving
+    } catch (error) {
+      console.error("Error saving response:", error);
+    }
+  };
 
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
@@ -53,6 +90,7 @@ const LinkedInCaptionGenerator = () => {
 
       const data = await response.json();
       setGeneratedContent(data.text);
+      await saveResponse(data.text); // Save the generated content
     } catch (error) {
       console.error("Error:", error);
       alert("Failed to generate content. Please try again.");
@@ -258,6 +296,30 @@ const LinkedInCaptionGenerator = () => {
               {generatedContent}
             </div>
           </motion.div>
+        )}
+
+        {savedResponses.length > 0 && (
+          <div className="mt-8">
+            <h2 className="text-2xl font-bold mb-4">Previous Responses</h2>
+            <div className="space-y-4">
+              {savedResponses.map((response, index) => (
+                <div
+                  key={index}
+                  className="p-4 bg-gray-800/30 rounded-lg hover:bg-gray-800/50 transition-colors"
+                >
+                  <div className="flex justify-between items-start mb-2">
+                    <h3 className="text-lg font-semibold">{response.title}</h3>
+                    <span className="text-sm text-gray-400">
+                      {new Date(response.timestamp).toLocaleDateString()}
+                    </span>
+                  </div>
+                  <p className="text-gray-300 whitespace-pre-wrap">
+                    {response.content}
+                  </p>
+                </div>
+              ))}
+            </div>
+          </div>
         )}
       </div>
     </div>
