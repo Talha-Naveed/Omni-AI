@@ -24,7 +24,7 @@ export default async function handler(req, res) {
       data: {
         name,
         email,
-        password, // Store password directly without hashing
+        password,
       },
     });
 

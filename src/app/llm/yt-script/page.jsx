@@ -14,6 +14,7 @@ export default function Home() {
   const [url, setUrl] = useState("");
   const [loadingMessage, setLoadingMessage] = useState("");
   const [transcriptGenerated, setTranscriptGenerated] = useState("");
+  const [savedResponses, setSavedResponses] = useState([]);
 
   async function handleSubmit(event) {
     event.preventDefault();
@@ -21,6 +22,10 @@ export default function Home() {
     try {
       const content = await generateContent();
       setTranscriptGenerated(content);
+      // Save response to database
+      await saveResponse(content);
+      // Refresh saved responses
+      await fetchSavedResponses();
     } catch (error) {
       console.error("Error generating content:", error);
     } finally {
@@ -47,6 +52,41 @@ export default function Home() {
       return "An error occurred while generating the content.";
     }
   }
+
+  async function saveResponse(content) {
+    try {
+      await fetch("/api/save-response", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          title: url,
+          content: content,
+          timestamp: new Date().toISOString(),
+        }),
+      });
+    } catch (error) {
+      console.error("Error saving response:", error);
+    }
+  }
+
+  async function fetchSavedResponses() {
+    try {
+      const response = await fetch("/api/get-responses");
+      if (response.ok) {
+        const data = await response.json();
+        setSavedResponses(data);
+      }
+    } catch (error) {
+      console.error("Error fetching saved responses:", error);
+    }
+  }
+
+  // Fetch saved responses on component mount
+  useState(() => {
+    fetchSavedResponses();
+  }, []);
 
   function formatMarkdown(text) {
     // Convert markdown to HTML
@@ -119,6 +159,27 @@ export default function Home() {
             />
           </div>
         )}
+
+        {/* Saved Responses Section */}
+        <div className="mt-12">
+          <h2 className="text-2xl font-bold mb-6 text-center">Saved Scripts</h2>
+          <div className="space-y-6">
+            {savedResponses.map((response, index) => (
+              <div key={index} className="bg-gray-800/50 p-6 rounded-lg">
+                <h3 className="text-xl font-semibold mb-2">{response.title}</h3>
+                <p className="text-gray-400 text-sm mb-4">
+                  {new Date(response.timestamp).toLocaleString()}
+                </p>
+                <div
+                  className="text-justify prose prose-invert max-w-none"
+                  dangerouslySetInnerHTML={{
+                    __html: formatMarkdown(response.content),
+                  }}
+                />
+              </div>
+            ))}
+          </div>
+        </div>
       </div>
     </div>
   );
