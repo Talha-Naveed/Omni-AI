@@ -1,3 +1,18 @@
+## Main Links
+Direct acces to our hosted Prompt LLMS
+<ul>
+  <li>
+  <a href = 'https://web-project-5th.vercel.app/llm/yt-script'>YouTube Script Generator</li>
+    <li>
+      <a href = 'https://web-project-5th.vercel.app/llm/linkedin-script'>LinkedIn Script Generator
+    </li>
+</ul>
+
+
+
+
+
+
 =======
 This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
