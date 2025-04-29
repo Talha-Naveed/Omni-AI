@@ -4,7 +4,7 @@ import { GoogleGenerativeAI } from "@google/generative-ai";
 
 export default async function handler(req, res) {
   const genAI = new GoogleGenerativeAI(process.env.GEMINI_KEY);
-  const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
+  const model = genAI.getGenerativeModel({ model: "gemini-2.0-flash" });
 
   const prompt = `You are a YouTube script generator. I want you to write me a script for my new YouTube video. I want to make a video on the following title: ${req.body.title}. 
   Please write a detailed, engaging script that includes:
